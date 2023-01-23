@@ -23,10 +23,14 @@ export default {
                 type: Sequelize.DataTypes.STRING,
                 allowNull: false,
             },
-            birthDate: {
+            birthdate: {
                 type: Sequelize.DataTypes.DATE,
                 allowNull: false,
             }, 
+            photo: {
+                type: Sequelize.DataTypes.STRING,
+                allowNull: false,
+            },
             username: {
                 type: Sequelize.DataTypes.STRING,
                 allowNull: false,

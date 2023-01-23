@@ -13,16 +13,6 @@ export default MysqlDatabase.getInstance().createModel('courses', {
                 type: Sequelize.DataTypes.STRING,
                 allowNull: false,
             },
-            idUsers: {
-                type: Sequelize.DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: {
-                        tableName: 'users'
-                    },
-                    key: 'idUsers'
-                }
-            },
             workload: {
                 type: Sequelize.DataTypes.STRING,
                 allowNull: false,

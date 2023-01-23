@@ -1,4 +1,5 @@
 import * as Sequelize from 'sequelize';
+import { DataType } from 'sequelize-typescript';
 
 export default {
     up: (queryInterface: Sequelize.QueryInterface) => {
@@ -13,16 +14,6 @@ export default {
             name: {
                 type: Sequelize.DataTypes.STRING,
                 allowNull: false,
-            },
-            idUsers: {
-                type: Sequelize.DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: {
-                        tableName: 'users'
-                    },
-                    key: 'idUsers'
-                }
             },
             workload: {
                 type: Sequelize.DataTypes.STRING,
