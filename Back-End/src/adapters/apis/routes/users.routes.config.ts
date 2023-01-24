@@ -25,28 +25,8 @@ export class UserRoutes extends CommonRoutesConfig {
                 userMiddleware.validateUserRepeated, // Verifica se o usuário concordou com os termos de uso
                 userController.createUser //cadastrar novo usuário
             ); 
-
-        this.app.route('/admin/')
-            .all(
-                authMiddleware.checkAuth, // verifica se o usuário está logado e retorna o idUser
-            )
-            .get(userController.listUsers) // Lista todos os usuários
-        
-        this.app.route('/admin/:idUser')
-            .get(userController.removeUser) // Perfil de um usuário
-            .put(
-                userMiddleware.validateRequiredNameBodyFields, // Verifica se o campo Nome foi preenchido
-                userMiddleware.validateRequiredEmailBodyFields, // Verifica se o campo Email foi preenchido
-                userMiddleware.validateRequiredBirthDateBodyFields, // Verifica se o campo Data de Nascimento foi preenchido
-                userMiddleware.validateRequiredPasswordBodyFields, // Verifica se o campo Senha é um número
-                userMiddleware.validateRequiredPhotoBodyFields, // Verifica se o campo Foto é um número
-                userMiddleware.validateRequiredUsernameBodyFields, // Verifica se o email e username enviados já existem
-                userMiddleware.validateUserRepeated, // Verifica se o usuário concordou com os termos de uso
-                userController.updateUser // atualizar um usuário específico
-                )
-            .delete(userController.removeUser) // Deleta um usuário
     
-        this.app.route(`/users/:idUser`)
+        this.app.route(`/users/:idUsers`)
             .all(
                 authMiddleware.checkAuth, // verifica se o usuário está logado e retorna o idUser
                 userMiddleware.validateUserExists // verifica se o idUser existe

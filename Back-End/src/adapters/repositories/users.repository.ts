@@ -53,7 +53,7 @@ export class UsersRepository implements IUsersRepository {
     }
 
     async deleteById(resourceId: number): Promise<void> {
-        await this._database.delete(this._modelUser, { idUser: resourceId });
+        await this._database.delete(this._modelUser, { idUsers: resourceId });
     }
 
     async list(): Promise<UsersEntity[]> {

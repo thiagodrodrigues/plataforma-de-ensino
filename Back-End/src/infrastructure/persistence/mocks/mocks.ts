@@ -39,7 +39,6 @@ class Mocks {
     };
     }
     async createClass(){
-        console.log(`LINHA 42 MOCKS`)
         let countClass = 0;
         for(countClass = 0; countClass < this._class.length; countClass++){
             await createClassUsecase.execute(this._class[countClass]);            

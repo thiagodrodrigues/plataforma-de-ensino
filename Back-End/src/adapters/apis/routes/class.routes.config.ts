@@ -10,16 +10,16 @@ export class ClassRoutes extends CommonRoutesConfig {
 
     configureRoutes(): express.Application {
 
-        this.app.route(`/class/:idUsers`)
+        this.app.route(`/class/courses/:idUsers`)
             .all(authMiddleware.checkAuth) // verifica se o usuário está logado e retorna o idUser
-            .get(classController.listCoursesByIdUser)
+            .get(classController.listCoursesByIdUser) // Lista todos os cursos matriculados por um usuário
 
 
-        this.app.route(`/class/:idCourses`)
+        this.app.route(`/class/users/:idCourses`)
                 .all(authMiddleware.checkAuth) // verifica se o usuário está logado e retorna o idUser
                 .post(classController.createClass) // usuário se matricula em um curso
                 .delete(classController.removeClass) // usuário cancela um curso
-                .get(classController.listUsersByIdCourses)
+                .get(classController.listUsersByIdCourses) // lista todos os alunos matriculados no curso
 
         return this.app;
     }

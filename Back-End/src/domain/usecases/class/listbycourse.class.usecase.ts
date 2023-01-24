@@ -1,6 +1,6 @@
 import { ClassEntity } from "../../entities/class/type.class.entity";
 import { IClassRepository } from "../../repositories/class.repository.interface";
-import AppointmentRepository from "../../../adapters/repositories/class.repository";
+import ClassRepository from "../../../adapters/repositories/class.repository";
 import { IUseCase } from "../usecase.interface";
 
 class ListByCourseUseCase implements IUseCase {
@@ -12,5 +12,5 @@ class ListByCourseUseCase implements IUseCase {
 }
 
 export default new ListByCourseUseCase(
-    AppointmentRepository
+    ClassRepository
 );

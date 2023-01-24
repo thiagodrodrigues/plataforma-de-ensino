@@ -69,7 +69,7 @@ class AppointmentController {
                     error: constantsConfig.CLASSES.MESSAGES.ERROR.REQUIRE_LOGIN
                 });
             } else {
-                if(decoded.idUsers !== req.params.idUsers){
+                if(decoded.idUsers !== req.params.idUsers && decoded.admin == false){
                     res.status(401).send({
                         error: constantsConfig.CLASSES.MESSAGES.ERROR.REQUIRE_LOGIN
                     })

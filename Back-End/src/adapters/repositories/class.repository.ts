@@ -26,11 +26,10 @@ export class ClassRepository implements IClassRepository {
       await this._database.delete(this._modelClass, { idUsers: resourceId, idCourses: resource_Id });
   }
 
-  async listByCourse(resourceId: number): Promise<ClassEntity[]> {
+  async listByCourse(idCourses: number): Promise<ClassEntity[]> {
     try{
-
-    const classGeneral = await this._database.list(this._modelClass, {
-        idCourses: resourceId
+    const classGeneral = await this._database.listById(this._modelClass, {
+        idCourses: idCourses
         });
         const classes = classGeneral.map(modelsToEntities);
         return classes;
@@ -39,10 +38,10 @@ export class ClassRepository implements IClassRepository {
     }
     };
 
-    async listByUsers(resourceId: number): Promise<ClassEntity[]> {
+    async listByUsers(idUsers: number): Promise<ClassEntity[]> {
         try{
-        const classGeneral = await this._database.list(this._modelClass, {
-            idUsers: resourceId
+        const classGeneral = await this._database.listById(this._modelClass, {
+            idUsers: idUsers
             });
             const classes = classGeneral.map(modelsToEntities);
             return classes;

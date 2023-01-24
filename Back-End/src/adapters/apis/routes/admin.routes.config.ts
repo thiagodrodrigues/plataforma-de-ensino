@@ -13,14 +13,14 @@ export class AdminRoutes extends CommonRoutesConfig {
 
     configureRoutes(): express.Application {
 
-        this.app.route('/admin/')
+        this.app.route('/admin')
             .all(
                 authMiddleware.checkAuthAdmin, // verifica se o usuário está logado e se é Administrador do site
             )
             .get(userController.listUsers) // Lista todos os usuários
         
-        this.app.route('/admin/:idUser')
-            .get(userController.removeUser) // Perfil de um usuário
+        this.app.route('/admin/:idUsers')
+            .get(userController.getUserById) // Perfil de um usuário
             .put(
                 userMiddleware.validateRequiredNameBodyFields, // Verifica se o campo Nome foi preenchido
                 userMiddleware.validateRequiredEmailBodyFields, // Verifica se o campo Email foi preenchido

@@ -9,20 +9,30 @@ class LoginAuthUseCase implements IUseCase {
 
     }
 
-    async execute(data: { resource: string, password: string }) {
-        const user = await this._repository.readByWhere(data.resource);
-
-        if(user && bcrypt.compareSync(data.password, user.password!)){
-            const token = jwt.sign(user, String(process.env.SECRET_KEY), {
-                expiresIn: '2 days'
-            });
-
-            return {
-                user: user,
-                token: token
-            };
+    async execute(data: any) {
+        if(data.email){
+            const user = await this._repository.readByWhere(data.email);
+            if(user && bcrypt.compareSync(data.password, user.password!)){
+                const token = jwt.sign(user, String(process.env.SECRET_KEY), {
+                    expiresIn: '2 days'
+                });
+                return {
+                    user: user,
+                    token: token
+                };
+            }
+        } else if(data.username) {
+            const user = await this._repository.readByWhere(data.username);
+            if(user && bcrypt.compareSync(data.password, user.password!)){
+                const token = jwt.sign(user, String(process.env.SECRET_KEY), {
+                    expiresIn: '2 days'
+                });
+                return {
+                    user: user,
+                    token: token
+                };
+            }
         }
-
         return;
     }
 }

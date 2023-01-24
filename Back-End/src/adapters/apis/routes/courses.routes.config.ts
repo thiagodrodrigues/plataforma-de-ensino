@@ -11,12 +11,12 @@ export class CoursesRoutes extends CommonRoutesConfig {
 
     configureRoutes(): express.Application {
         this.app.route(`/courses`)
-                .all(authMiddleware.checkAuth) // verifica se o usuário está logado e retorna o idUser
+                .all(authMiddleware.check) // verifica se o usuário está logado e retorna o idUser
                 .get(coursesController.listCourses) // lista todas os cursos do site
                     
 
         this.app.route(`/courses/:idCourses`)
-            .all(authMiddleware.checkAuth) // verifica se o usuário está logado e retorna o idUser
+            .all(authMiddleware.check) // verifica se o usuário está logado e retorna o idUser
             .get(coursesController.getCourseById) // visualizar um curso específico
 
 

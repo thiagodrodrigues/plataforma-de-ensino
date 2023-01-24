@@ -5,6 +5,8 @@ import deleteUsersUsecase from '../../../domain/usecases/users/delete.users.usec
 import updateUsersUsecase from '../../../domain/usecases/users/update.users.usecase';
 import listUsersUsecase from '../../../domain/usecases/users/list.users.usecase';
 import loginUsersUsecase from '../../../domain/usecases/users/login.users.usecase';
+import deleteClassUsecase from '../../../domain/usecases/class/delete.class.usecase';
+import listbyuserClassUsecase from '../../../domain/usecases/class/listbyuser.class.usecase';
 import debug from 'debug';
 import constantsConfig from '../../../infrastructure/config/constants.config';
 import bcrypt from 'bcrypt';
@@ -43,7 +45,7 @@ class UsersController {
                             name: user!.name,
                             email: user!.email,
                             photo: user!.photo,
-                            username: user?.username,
+                            username: user!.username,
                             birthdate: user!.birthdate
                         });
                     }
@@ -140,6 +142,17 @@ class UsersController {
                     error: constantsConfig.USERS.MESSAGES.ERROR.REQUIRE_LOGIN
                 });
             } else {
+                const courses = await listbyuserClassUsecase.execute({
+                    idUsers: Number(req.params.idUsers)
+                })
+                let index = 0;
+                for(index = 0; index < courses!.length; index++){
+                    const classes = await deleteClassUsecase.execute({
+                        idUsers: Number(req.params.idUsers),
+                        idCourses: courses![index].idCourses
+                    })
+                }
+                
                 const User = await deleteUsersUsecase.execute({
                     idUsers: Number(req.params.idUsers)
                 });

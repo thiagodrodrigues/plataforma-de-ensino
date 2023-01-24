@@ -60,7 +60,7 @@ export default class FakerMocks implements IMocks{
     private _getCourses(): CoursesEntity[]{
         faker.locale = 'pt_BR'
         const courses: CoursesEntity[] = [];
-        Array.from({ length: 50}).forEach(()=>{
+        Array.from({ length: 15}).forEach(()=>{
             courses.push({
                 name: faker.helpers.arrayElement(['Node', 'Java', 'Typescript', 'React', 'Git', 'CSS', 'MySQL', 'Mongo']),
                 workload: `${faker.datatype.number({min: 8, max: 120, precision: 4})} horas`,
