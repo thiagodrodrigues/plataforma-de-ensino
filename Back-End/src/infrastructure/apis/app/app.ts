@@ -1,4 +1,4 @@
-/* import express from "express";
+import express from "express";
 import * as http from "http";
 
 import * as winston from "winston";
@@ -6,9 +6,11 @@ import * as expressWinston from "express-winston";
 import cors from "cors";
 import{ debug } from "debug";
 
-import { UserRoutes } from "../../adapters/apis/routes/users.routes.config";
-import { CoursesRoutes } from "../../adapters/apis/routes/courses.routes.config";
-import { CommonRoutesConfig } from "../../adapters/apis/routes/common.routes.config";
+import { UserRoutes } from "../../../adapters/apis/routes/users.routes.config";
+import { CoursesRoutes } from "../../../adapters/apis/routes/courses.routes.config";
+import { ClassRoutes } from "../../../adapters/apis/routes/class.routes.config";
+import { AdminRoutes } from "../../../adapters/apis/routes/admin.routes.config";
+import { CommonRoutesConfig } from "../../../adapters/apis/routes/common.routes.config";
 import path from "path";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
@@ -44,6 +46,8 @@ app.use(expressWinston.logger(loggerOptions));
 
 routes.push(new UserRoutes(app));
 routes.push(new CoursesRoutes(app));
+routes.push(new ClassRoutes(app));
+routes.push(new AdminRoutes(app));
 
 
 let runningMessage = `Servidor rodando na porta ${PORT}`;
@@ -62,4 +66,4 @@ app.get('/', (request: express.Request, response: express.Response) => {
         });
         console.log(runningMessage)});
 
-export default app; */
+export default app;

@@ -49,7 +49,7 @@ export default class FakerMocks implements IMocks{
                 email: String(faker.internet.email()),
                 password: shufflePass,
                 birthdate: faker.date.past(),
-                username: `${faker.name.firstName()}${faker.animal.type()}${faker.datatype.number({ min: 10, max: 99, precision: 1})}`,
+                username: faker.helpers.slugify(`${faker.name.firstName()}${faker.animal.type()}${faker.datatype.number({ min: 10, max: 99, precision: 1})}`),
                 photo: faker.helpers.arrayElement(["https://cdn-icons-png.flaticon.com/512/1077/1077114.png", "https://cdn-icons-png.flaticon.com/512/149/149071.png", "https://cdn-icons-png.flaticon.com/512/74/74472.png", "https://cdn-icons-png.flaticon.com/128/1077/1077063.png", "https://cdn-icons-png.flaticon.com/512/219/219983.png", "https://cdn-icons-png.flaticon.com/512/747/747376.png", "https://cdn-icons-png.flaticon.com/512/599/599305.png", "https://cdn-icons-png.flaticon.com/512/219/219988.png"]),
                 admin: false,
             });

@@ -21,13 +21,51 @@ class AuthMiddleware {
                         error: constantsConfig.USERS.MESSAGES.ERROR.REQUIRE_LOGIN
                     });
                 } else {
-                    const params = await Number(req.params.idUser);
-                    const login = await Number(decoded.idUser);
+                    const params = await Number(req.params.idUsers);
+                    const login = await Number(decoded.idUsers);
                     if(params !== login){
                         res.status(401).send({
                             error: constantsConfig.USERS.MESSAGES.ERROR.UNAUTHORIZED
                         });
                     } else {
+                    next();
+                }}
+            }
+
+        } catch (err) {
+            res.status(401).send({
+                error: constantsConfig.USERS.MESSAGES.ERROR.REQUIRE_LOGIN
+            });
+        }
+    }
+
+    async checkAuthAdmin(req: express.Request, res: express.Response, next: express.NextFunction){
+        try{
+            const token = req.header(`Authorization`)?.replace(`Bearer `, ``);
+
+            if(!token){
+                res.status(401).send({
+                    error: constantsConfig.USERS.MESSAGES.ERROR.REQUIRE_LOGIN
+                });
+            } else {
+                const decoded = jwt.verify(token, String(process.env.SECRET_KEY));
+                if(typeof decoded == `string`){
+                    res.status(401).send({
+                        error: constantsConfig.USERS.MESSAGES.ERROR.REQUIRE_LOGIN
+                    });
+                } else {
+                    const params = await Number(req.params.idUsers);
+                    const login = await Number(decoded.idUsers);
+                    if(params !== login){
+                        res.status(401).send({
+                            error: constantsConfig.USERS.MESSAGES.ERROR.UNAUTHORIZED
+                        });
+                    } else {
+                        if(decoded.admin == false){
+                            res.status(401).send({
+                                error: constantsConfig.USERS.MESSAGES.ERROR.UNAUTHORIZED
+                            })
+                        }
                     next();
                 }}
             }

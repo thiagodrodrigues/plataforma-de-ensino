@@ -3,7 +3,7 @@ export interface ICoursesEntity {
     name: string,
     workload: string,
     description?: string,
-    video?: string,
+    video: string,
     createdAt?: Date,
     updatedAt?: Date,
 }

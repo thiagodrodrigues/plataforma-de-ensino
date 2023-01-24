@@ -6,7 +6,7 @@ export interface IUsersEntity {
     birthdate: Date,
     username: string,
     photo: string,
-    admin?: boolean,
+    admin: boolean,
     createdAt?: Date,
     updatedAt?: Date,
 }

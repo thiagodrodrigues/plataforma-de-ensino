@@ -18,7 +18,10 @@ export default MysqlDatabase.getInstance().createModel('courses', {
                 allowNull: false,
             },
             description: Sequelize.DataTypes.STRING,
-            video: Sequelize.DataTypes.STRING,
+            video: {
+                type: Sequelize.DataTypes.STRING,
+                allowNull: false,
+            },
             createdAt: Sequelize.DataTypes.DATE,
             updatedAt: Sequelize.DataTypes.DATE,
 });

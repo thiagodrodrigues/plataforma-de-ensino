@@ -1,5 +1,5 @@
-/* import express from 'express';
-import ReadEmailUseCase from '../../../domain/usecases/users/readEmail.users.usecase';
+import express from 'express';
+import readByWhereUsersUsecase from '../../../domain/usecases/users/readByWhere.users.usecase';
 import debug from 'debug';
 import constantsConfig from '../../../infrastructure/config/constants.config';
 import readUsersUsecase from '../../../domain/usecases/users/read.users.usecase';
@@ -9,23 +9,22 @@ const log: debug.IDebugger = debug('app:user-middleware');
 class UserMiddleware {
     
     async validateUserRepeated(req: express.Request, res: express.Response, next: express.NextFunction) {
-        let dataWhere: string = req.body.email;
-        let idUser: number = Number(req.params.idUser);
-        const user = await ReadEmailUseCase.execute({
-            email: dataWhere
-        });
+        let email: string = req.body.email;
+        let username: string = req.body.username;
+        let idUsers: number = Number(req.params.idUsers);
+        const user = await readByWhereUsersUsecase.execute(req.body);
         if(!user){
             next();
-        } else if(dataWhere == user.email && idUser == user.idUser) {
+        } else if(email == user.email && idUsers == user.idUsers || username == user.username && idUsers == user.idUsers) {
             next();
         } else {
-            res.status(409).send({error: constantsConfig.USERS.MESSAGES.ERROR.USER_ALREADY_EXISTS.replace('{USER_ID}', String(dataWhere))});
+            res.status(409).send({error: constantsConfig.USERS.MESSAGES.ERROR.USER_ALREADY_EXISTS.replace('{USER_ID}', `${email} ou ${username}`)});
         }
     }
 
     async validateUserExists(req: express.Request, res: express.Response, next: express.NextFunction) {
         const user = await readUsersUsecase.execute({
-            idUser: Number(req.params.idUser)
+            idUsers: Number(req.params.idUsers)
         });
         if(user) {
             next();
@@ -59,49 +58,29 @@ class UserMiddleware {
     }
 
     async validateRequiredBirthDateBodyFields(req: express.Request, res: express.Response, next: express.NextFunction){
-        if(req.body.birthDate) {
+        if(req.body.birthdate) {
                 next();
         } else {
             res.status(400).send({error: constantsConfig.USERS.MESSAGES.ERROR.VOID_BIRTHDATE});
         }
     }
 
-    async validateWeightNumber(req: express.Request, res: express.Response, next: express.NextFunction){
-        const weight = await req.body.weight
-        if(typeof weight == "number"){
-            next();
+    async validateRequiredUsernameBodyFields(req: express.Request, res: express.Response, next: express.NextFunction){
+        if(req.body.username) {
+                next();
         } else {
-            res.status(400).send({error: constantsConfig.USERS.MESSAGES.ERROR.WEIGHY_NOT_NUMBER})
+            res.status(400).send({error: constantsConfig.USERS.MESSAGES.ERROR.VOID_USERNAME});
         }
     }
 
-    async validateHeightNumber(req: express.Request, res: express.Response, next: express.NextFunction){
-        const height = await req.body.height
-        if(typeof height == "number"){
-            next();
+    async validateRequiredPhotoBodyFields(req: express.Request, res: express.Response, next: express.NextFunction){
+        if(req.body.photo) {
+                next();
         } else {
-            res.status(400).send({error: constantsConfig.USERS.MESSAGES.ERROR.HEIGHY_NOT_NUMBER})
-        }
-    }
-
-    async validateNumberAddressNumber(req: express.Request, res: express.Response, next: express.NextFunction){
-        const weight = await req.body.weight
-        if(typeof weight == "number"){
-            next();
-        } else {
-            res.status(400).send({error: constantsConfig.USERS.MESSAGES.ERROR.NUMBER_ADDRESS_NOT_NUMBER})
-        }
-    }
-
-    async validateStatusTrue(req: express.Request, res: express.Response, next: express.NextFunction){
-        const status = await req.body.status
-        if(status === true){
-            next();
-        } else {
-            res.status(400).send({error: constantsConfig.USERS.MESSAGES.ERROR.STATUS_NOT_TRUE})
+            res.status(400).send({error: constantsConfig.USERS.MESSAGES.ERROR.VOID_PHOTO});
         }
     }
 
 }
 
-export default new UserMiddleware(); */
+export default new UserMiddleware();

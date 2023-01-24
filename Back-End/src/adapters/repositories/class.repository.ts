@@ -17,11 +17,8 @@ export class ClassRepository implements IClassRepository {
 
 
   async create(resource: ClassEntity): Promise<ClassEntity> {
-    console.log("LINHA 20 ADAPTERS REPOSITORIES CLASS CREATE")
       const { classGeneral }  = entitiesToModels(resource);
-      console.log("LINHA 22 ADAPTERS REPOSITORIES CLASS CREATE")
       await this._database.create(this._modelClass, classGeneral);
-      console.log("LINHA 24 ADAPTERS REPOSITORIES CLASS CREATE")
       return resource;
   }
 

@@ -9,34 +9,28 @@ export default {
                 VOID_EMAIL: `O campo 'Email' deve ser preenchido`,
                 VOID_PASSWORD: `O campo 'Senha' deve ser preenchido`,
                 VOID_BIRTHDATE: `O campo 'Data de Nascimento' deve ser preenchido`,
-                HEIGHY_NOT_NUMBER: `O campo 'Altura' deve ser um número`,
-                WEIGHY_NOT_NUMBER: `O campo 'Peso' deve ser um número`,
-                NUMBER_ADDRESS_NOT_NUMBER: `O campo 'Número' deve ser um número`,
+                VOID_USERNAME: `O campo 'Nome de Usuário' deve ser preenchido`,
+                VOID_PHOTO: `O campo 'Foto' deve ser preenchido`,
                 UNAUTHORIZED: `Usuário logado deve ser igual ao informado no parâmetro. Não autorizado.`,
-                STATUS_NOT_TRUE: `Você precisa concordar com os Termos de Uso.`,
                 REQUIRE_LOGIN: `Você precisa estar logado para executar essa ação.`
             }
         }
     },
-    APPOINTMENTS: {
+    CLASSES: {
         MESSAGES: {
             ERROR: {
                 REQUIRE_LOGIN: `Faça login para continuar.`,
-                CRM_NOT_NUMBER: `O CRM do médico deve ser um número`,
-                VOID_MEDICAL_SPECIALTIES: `O campo 'Especialidade Médica' deve ser preenchido`,
-                VOID_DATE: `O campo 'Data' deve ser preenchido`,
-                VOID_DOCTOR: `O campo 'Médico' deve ser preenchido`,
-                VOID_HOSPITAL: `O campo 'Hospital' deve ser preenchido`
             }
         }
     },
-    EXAMS: {
+    COURSES: {
         MESSAGES: {
             ERROR: {
                 REQUIRE_LOGIN: `Faça login para continuar.`,
-                VOID_EXAM: `O campo 'Exame' deve ser preenchido`,
-                VOID_DATE: `O campo 'Data' deve ser preenchido`,
-                VOID_CLINIC: `O campo 'Local' deve ser preenchido`
+                VOID_NAME: `O campo 'Nome' deve ser preenchido`,
+                VOID_WORKLOAD: `O campo 'Carga Horária' deve ser preenchido`,
+                VOID_VIDEO: `O campo 'Vídeo' deve ser preenchido`,
+                UNAUTHORIZED: `Usuário logado deve ser um administrador para executar esta função. Não autorizado.`,
             }
         }
     }

@@ -7,7 +7,6 @@ export class CreateClassUseCase implements IUseCase {
     constructor(private _repository: IClassRepository) {
     }
     async execute(data: ClassEntity): Promise<ClassEntity | undefined> {
-        console.log("LINHA 10 USECASES CLASS CREATE")
         return await this._repository.create(data);
     }
 }
